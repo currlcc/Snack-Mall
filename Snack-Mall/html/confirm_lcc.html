@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>确认订单</title>
+		<link rel="stylesheet" type="text/css" href="style .css"/>
+		<link rel="stylesheet" type="text/css" href="cart.css"/>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		
+		<script type="text/javascript" src="js/n_nav.js"></script>
+		
+		<script type="text/javascript" src="js/num.js"></script>
+		
+		<script type="text/javascript" src="js/toptop.js"> </script>
+		<script type="text/javascript" src="js/tantan.js"></script>
+		<script src="js/carts.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function showDate()
+			{
+				var curDate = new Date();
+				var year = curDate.getFullYear();
+				var month = curDate.getMonth()+1;
+				var date = curDate.getDate();
+				var day = curDate.getDay();
+				var week = ["日","一","二","三","四","五","六"];
+				var hours = curDate.getHours();
+				var minutes = curDate.getMinutes();
+				var seconds = curDate.getSeconds();
+				var str;
+		
+				str = year+"年"+time(month)+"月"+time(date)+"日&nbsp;&nbsp;星期"+week[day]+"&nbsp;&nbsp;"+time(hours)+"时"+time(minutes)+"分"+time(seconds)+"秒";
+				console.log(str);
+				document.getElementById("showtime").innerHTML=str;
+			}
+			function time(x)
+			{
+				return x>=10?x:"0"+x;
+			}
+			window.onload=function()
+			{
+				showDate();
+				setInterval(showDate,1000);
+			}
+		</script>
+	</head>
+    <style>
+        div.buyPageDiv{
+            margin: 20px auto;
+            max-width: 1013px;
+        }
+        div.address{
+            margin: 20px 5px;
+            text-align: left;
+        }
+        div.addressTip, div.productListTip{
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        table.addressTable{
+            margin: 20px 20px;
+            width: 600px;
+            font-size:12px;
+        }
+        table.addressTable td{
+            color: #333333;
+            text-align: right;
+            vertical-align: top;
+            padding-right: 5px;
+            text-align: left;
+            height: 30px;
+        }
+        table.addressTable td.firstColumn{
+            width: 100px;
+        }
+        table.addressTable td textarea{
+            border: 1px solid #AFAFAF;
+            margin-bottom: 10px;
+            width: 400px;
+        }
+        table.addressTable td input{
+            border: 1px solid #AFAFAF;
+            width: 200px;
+        }
+        span.redStar{
+            color: red;
+            font-size: 8px;
+        }
+        div.buyPageDiv{
+            margin: 20px auto;
+            max-width: 1013px;
+        }
+        div.addressTip, div.productListTip{
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        table.productListTable{
+            width: 100%;
+            border-collapse: separate;
+            font-size:12px;
+        }
+        table.productListTable th{
+            color: #555555;
+            font-family: 宋体;
+            font-weight: normal;
+            font-size: 12px;
+            text-align: center;
+            padding-bottom: 5px;
+        }
+        table.productListTable tr.rowborder td{
+            background-color: #ff4e00;
+            border-right: 2px solid #ff4;
+            height: 3px;
+        }
+        th.productListTableFirstColumn{
+            text-align: left !important;
+        }
+        tbody.productListTableTbody td{
+            text-align: center;
+        }
+        tbody.productListTableTbody td.orderItemFirstTD{
+            text-align: left;
+        }
+        tr.orderItemTR td{
+            border-bottom: 1px solid #E5E5E5;
+        }
+        tr.orderItemTR td{
+            padding: 10px 0px;
+        }
+        img.orderItemImg{
+            width: 50px;
+            height: 50px;
+            border: 1px solid #E9E9E9;
+        }
+        td.orderItemProductInfo{
+            text-align:left !important;
+        }
+        td.orderItemProductInfo img{
+            height: 16px;
+        }
+        a.orderItemProductLink{
+            color: #666666;
+            display: block;
+        }
+        a.orderItemProductLink:hover{
+            color: #666666;
+            text-decoration: underline;
+        }
+        span.orderItemProductPrice, span.orderItemProductNumber{
+            color: #000000;
+        }
+        span.orderItemUnitSum{
+            color: #CC0000;
+            font-weight: bold;
+        }
+        td.orderItemFirstTD, td.orderItemLastTD{
+            border-bottom: 0px solid black !important;
+        }
+        label.orderItemDeliveryLabel{
+            color: #666666;
+            font-family: 宋体;
+            font-size: 12px;
+            font-weight: normal;
+        }
+        select.orderItemDeliverySelect{
+            width: 100px;
+            height: 23px;
+        }
+        div.orderItemSumDiv{
+            padding: 20px;
+            border-top: 2px solid #ff4e00;
+            background-color: #F5F5F5;
+        }
+        div.orderItemSumDiv span{
+            color: #999999;
+        }
+        span.leaveMessageText{
+            display: inline-block;
+            margin-right: 10px;
+            float: left;
+        }
+        div.orderItemTotalSumDiv{
+            margin: 40px;
+            height: 40px;
+        }
+        div.submitOrderDiv{
+            height: 40px;
+            margin: 20px 0px;
+        }
+        div.orderItemTotalSumDiv span{
+            color: #999999;
+        }
+        span.orderItemTotalSumSpan{
+            color: #C40000 !important;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 1px dotted #F2F6FF;
+        }
+        button.submitOrderButton{
+            border: 1px solid #C40000;
+            background-color: #C40000;
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            float: right;
+            display:inline-block;
+            margin:0px 10px;
+                width:180px;
+            height: 40px;
+        }
+        .leaveMessageTextarea{
+            border: 1px solid #C3B345;
+        }
+        a{
+            color:#999;
+        }
+        .redColor{
+            color: #C40000 !important;
+        }
+        nav.top{
+            background-color: #f2f2f2;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-bottom:1px solid  #e7e7e7;
+        }
+        nav.top span, nav.top a{
+            color: #999;
+            margin: 0px 10px 0px 10px;
+        }
+        nav.top a:hover{
+            color: #C40000;
+            text-decoration: none;
+        }
+        .tmall-logo-img{
+            margin-top: 290px;
+            float: left;
+            position: absolute;
+        }
+        div.searchDiv input{
+            width: 475px;
+            border: 1px solid transparent;
+            height: 36px;
+            margin: 1px;
+            outline:none;
+        }
+        div.searchDiv button{
+            width: 110px;
+            border: 1px solid transparent;
+            background-color: #C40000;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        div.searchBelow{
+            margin-top: 3px;
+            margin-left: -20px;
+        }
+        div.searchBelow span{
+            color: #999;
+        }
+        div.searchBelow a{
+            padding: 0px 20px 0px 20px;
+            font-size: 14px;
+        }
+        body{
+            font-size:12px;
+            font-family:Arial;
+        }
+        footer {
+            left: 0; 
+            bottom: 0;
+            width: 100vw; /* 100% of viewport width */
+        }
+    </style>
+    <script>
+        //获取传入的参数
+	    function getParam(paramName) {
+            paramValue = "", isFound = !1;
+            if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+            }
+            return paramValue == "" && (paramValue = null), paramValue
+        }
+		//刷新页面
+	    function relaodDom(){
+		    var dom="<tr class='orderItemTR'><td class='orderItemFirstTD'><img width='20px' src='"+g_itemVO.imgUrl+"' class='orderItemImg'></td><td class='orderItemProductInfo'><a class='orderItemProductLink' href='#nowhere'>"+g_itemVO.description+"</a><img title='支持信用卡支付' src='http://how2j.cn/tmall/img/site/creditcard.png'><img title='消费者保障服务,承诺7天退货' src='http://how2j.cn/tmall/img/site/7day.png'><img title='消费者保障服务,承诺如实描述' src='http://how2j.cn/tmall/img/site/promise.png'></td><td><span class='orderItemProductPrice'>￥"+g_itemVO.price+"</span></td><td><span class='orderItemProductNumber'>1</span></td><td><span class='orderItemUnitSum'>￥"+g_itemVO.price+"</span></td><td class='orderItemLastTD' rowspan='5'><label class='orderItemDeliveryLabel'></td></tr>"
+		    $(".productListTableTbody").append($(dom));
+	    }
+	    $(function(){
+		    $(".submitOrderButton").click(function(){
+			    location.href="payfor_lcc.html?money="+$(".orderItemTotalSumSpan").html();
+            });
+			$.ajax({
+				type:"GET",
+				url:"http://localhost:8093/item/getItem",
+				data:{
+					"id":getParam("id"),
+				},
+				xhrFields:{withCredentials:true},
+				success:function(data){
+					if(data.status == "success"){
+                        g_itemVO = data.data;
+						relaodDom();
+					}else{
+						//alert("获取信息失败，原因为"+data.data.errMsg)
+					}
+				},
+				error:function(data){
+					//alert("获取信息失败，原因为"+data.responseText);
+				}
+			});
+		$("img.leaveMessageImg").click(function(){
+			$("img.leaveMessageImg").hide();
+			$("span.leaveMessageTextareaSpan").attr("style","display:inline-block");
+			$("div.orderItemSumDiv").attr("style","height:110px");
+		})
+	    })
+    </script>
+	<body>
+		<!-- Head Begin -->
+		<div class="headbg">
+			<div class="head">
+				<!-- Begin 任务栏 -->
+				<span class="fr">
+					<span class="fl">
+						你好，请<a href="login.html">登录&nbsp;</a> 
+						<a href="regist.html" style="color: red;">免费注册</a>
+						 | <a href="myorder_lcc.html">我的订单</a>
+						
+					
+						| 关注我们：
+					</span>
+					<span class="show_style">
+						<a href="#" class="style1">新浪</a>
+						<a href="#" class="style2">微信</a>
+					</span>
+					<span class="fr">
+						| 
+						<a href="#">
+							手机版
+							<img src="image/s_tel.png" align="absmiddle">
+						</a>
+					</span>
+				</span>
+			</div>
+		</div>
+		<!-- End 任务栏 -->
+		
+		<!-- Begin 任务栏下面 logo 搜索 购物车-->
+		<div class="top">
+			<div class="logo">
+				<a href="index.html">
+					<img src="image/logo.png" >
+				</a>
+			</div>
+			<div class="search">
+				<form action="">
+					<input type="text" value="" class="search_input" />
+					<input type="submit" value="搜索" class="search_button" />
+				</form>
+				
+			</div>
+			<div class="info_car">
+				<div class="car_temp">购物车 <a href="buycar.html">GO</a></div>
+				
+			</div>
+		</div>
+		<!--End Head--> 
+		<!--Begin Menu -->
+		<div class="menu_bg">
+		    <div class="menu">
+		        <!--Begin 商品分类详情 Begin-->s
+		        <div class="nav">
+		            <div class="nav_t">全部商品分类</div>
+		            
+		        </div>
+		        <!--End 商品分类详情 End-->
+		        <ul class="menu_r">
+		            <li><a href="index.html">首页</a></li>
+                    <li><a href="休闲零食.html">休闲零食</a></li>
+                    <li><a href="糕点饼干.html">糕点饼干</a></li>
+                    <li><a href="饮料酒水.html">饮料酒水</a></li>
+                    <li><a href="坚果.html">坚果</a></li>
+					<div id="showtime"></div>
+		        </ul>
+		        <div class="m_ad">双十一送好礼！</div>
+		    </div>
+		</div>
+		<!--End Menu-->
+		
+		<!-- 车车车 -->
+		<div class="i_bg">
+		    <div class="buyPageDiv">
+                <div class="address">
+                    <div class="addressTip">输入收货地址</div>
+                    <div>
+                        <table class="addressTable">
+                            <tbody><tr>
+                                <td class="firstColumn">详细地址<span class="redStar">*</span></td>
+                                <td><textarea placeholder="建议您如实填写详细收货地址，例如接到名称，门牌好吗，楼层和房间号等信息" name="address"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>邮政编码</td>
+                                <td><input type="text" placeholder="如果您不清楚邮递区号，请填写000000" name="post"></td>
+                            </tr>
+                            <tr>
+                                <td>收货人姓名<span class="redStar">*</span></td>
+                                <td><input type="text" placeholder="长度不超过25个字符" name="receiver"></td>
+                            </tr>
+                            <tr>
+                                <td>手机号码 <span class="redStar">*</span></td>
+                                <td><input type="text" placeholder="请输入11位手机号码" name="mobile"></td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </div>
+            </div>
+            <div class="buyPageDiv">
+                <div class="productList">
+                    <div class="productListTip">确认订单信息</div>
+                    <table class="productListTable">
+                        <thead>
+                            <tr>
+                                <th class="productListTableFirstColumn" colspan="2">商品</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                                <th>配送方式</th>
+                            </tr>
+                            <tr class="rowborder">
+                                <td colspan="2"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody class="productListTableTbody">
+                                <tr class="orderItemTR">
+                                    <td class="orderItemFirstTD"><img width="20px"  src="image/cook1.jpg" class="orderItemImg"></td>
+                                    <td class="orderItemProductInfo">
+                                    <a class="orderItemProductLink" href="product2.html">
+                                        乳酸菌面包
+                                    </a>
+                                        <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                    </td>
+                                    <td>
+                                    <span class="orderItemProductPrice">¥19.00</span>
+                                    </td>
+                                    <td>
+                                    <span class="orderItemProductNumber">2</span>
+                                    </td>
+                                    <td><span class="orderItemUnitSum">
+                                        ¥38.00
+                                    </span></td>
+                                    <td class="orderItemLastTD" rowspan="5">
+                                    <label class="orderItemDeliveryLabel">
+                                        <input type="radio" checked="checked" value="">
+                                        普通配送
+                                    </label>
+                                    <select class="orderItemDeliverySelect">
+                                        <option>快递 免邮费</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr class="orderItemTR">
+                                    <td class="orderItemFirstTD"><img width="20px"  src="image/p7-1.jpg" class="orderItemImg"></td>
+                                    <td class="orderItemProductInfo">
+                                    <a class="orderItemProductLink" href="product5.html">
+                                        盐津铺子冻干酸奶块网红水果干
+                                    </a>
+                                    <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                    </td>
+                                    <td>
+                                    <span class="orderItemProductPrice">¥18.00</span>
+                                    </td>
+                                    <td>
+                                    <span class="orderItemProductNumber">1</span>
+                                    </td>
+                                    <td><span class="orderItemUnitSum">
+                                        ¥18.00
+                                    </span></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <div class="orderItemSumDiv" style="height: 50px;">
+                        <div class="pull-left">
+                            <span class="leaveMessageText">给卖家留言:</span>
+                            <span>
+                                <img src="http://how2j.cn/tmall/img/site/leaveMessage.png" class="leaveMessageImg">
+                            </span>
+                            <span class="leaveMessageTextareaSpan"  style="display: none;">
+                                <textarea rows="3" cols="30" class="leaveMessageTextarea" name="userMessage"></textarea>
+                            </span>
+                        </div>
+                        <span class="pull-right">店铺合计(含运费): ¥56.00</span>
+                    </div>
+                </div>
+                <div class="orderItemTotalSumDiv">
+                    <div class="pull-right"> 
+                        <span>实付款：</span>
+                        <span class="orderItemTotalSumSpan">¥56.00</span>
+                    </div>
+                </div>
+                <div class="submitOrderDiv">
+                        <button class="submitOrderButton" type="button">提交订单</button>
+                </div>
+			
+			<!--返回顶部-->
+			<div class="gotop">
+				<a href="buycar.html">
+					<dl>
+						<dt><img src="image/gt1.png"/></dt>
+						<dd>去购<br />物车</dd>
+					</dl>
+				</a>
+				<a href="#" class="toptop">
+					<dl>
+						<dt><img src="image/gt4.png"/></dt>
+						<dd>返回<br />顶部</dd>
+					</dl>
+				</a>
+			</div>
+			
+			
+		</div>
+	</body>
+    <footer>
+        <!--Begin Footer-->
+        <div class="behind_bottom_bg behind_bottom_common">
+            <div class="behind_bottom">
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="image/b1.png" width="62" height="62" /></td>
+                        <td>
+                            <h2>正品保障</h2>正品行货 放心购买
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="image/b2.png" width="62" height="62" /></td>
+                        <td>
+                            <h2>满38包邮</h2>满38包邮 免运费
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="image/b3.png" width="62" height="62" /></td>
+                        <td>
+                            <h2>天天低价</h2>天天低价 畅选无忧
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="image/b4.png" width="62" height="62" /></td>
+                        <td>
+                            <h2>准时送达</h2>收货时间由你做主
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="bottom_bg">
+            <div class="bottom">
+                备案/许可证编号：京ICP备120093xxxx号 Copyright © 2019-2023 进口商城商城网 All Rights Reserved. <br />
+                
+            </div>
+        </div>
+    <!--End Footer -->
+    </footer>
+
+</html>

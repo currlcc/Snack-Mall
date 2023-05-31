@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>购物车</title>
+		<link rel="stylesheet" type="text/css" href="style .css"/>
+		<link rel="stylesheet" type="text/css" href="cart.css"/>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		
+		<script type="text/javascript" src="js/n_nav.js"></script>
+		
+		<script type="text/javascript" src="js/num.js"></script>
+		
+		<script type="text/javascript" src="js/toptop.js"> </script>
+		<script type="text/javascript" src="js/tantan.js"></script>
+		<script src="js/carts.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function showDate()
+			{
+				var curDate = new Date();
+				var year = curDate.getFullYear();
+				var month = curDate.getMonth()+1;
+				var date = curDate.getDate();
+				var day = curDate.getDay();
+				var week = ["日","一","二","三","四","五","六"];
+				var hours = curDate.getHours();
+				var minutes = curDate.getMinutes();
+				var seconds = curDate.getSeconds();
+				var str;
+		
+				str = year+"年"+time(month)+"月"+time(date)+"日&nbsp;&nbsp;星期"+week[day]+"&nbsp;&nbsp;"+time(hours)+"时"+time(minutes)+"分"+time(seconds)+"秒";
+				console.log(str);
+				document.getElementById("showtime").innerHTML=str;
+			}
+			function time(x)
+			{
+				return x>=10?x:"0"+x;
+			}
+			window.onload=function()
+			{
+				showDate();
+				setInterval(showDate,1000);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Head Begin -->
+		<div class="headbg">
+			<div class="head">
+				
+				
+				<!-- Begin 任务栏 -->
+				<span class="fr">
+					<span class="fl">
+						你好，请<a href="login.html">登录&nbsp;</a> 
+						<a href="regist.html" style="color: red;">免费注册</a>
+						 | <a href="myorder_lcc.html">我的订单</a>
+						
+					
+						| 关注我们：
+					</span>
+					<span class="show_style">
+						<a href="#" class="style1">新浪</a>
+						<a href="#" class="style2">微信</a>
+					</span>
+					<span class="fr">
+						| 
+						<a href="#">
+							手机版
+							<img src="image/s_tel.png" align="absmiddle">
+						</a>
+					</span>
+				</span>
+			</div>
+		</div>
+		<!-- End 任务栏 -->
+		
+		<!-- Begin 任务栏下面 logo 搜索 购物车-->
+		<div class="top">
+			<div class="logo">
+				<a href="index.html">
+					<img src="image/logo.png" >
+				</a>
+			</div>
+			<div class="search">
+				<form action="">
+					<input type="text" value="" class="search_input" />
+					<input type="submit" value="搜索" class="search_button" />
+				</form>
+				
+			</div>
+			<div class="info_car">
+				<div class="car_temp">购物车 <a href="buycar.html">GO</a></div>
+				
+			</div>
+		</div>
+		<!--End Head--> 
+		<!--Begin Menu -->
+		<div class="menu_bg">
+		    <div class="menu">
+		        <!--Begin 商品分类详情 Begin-->
+		        <div class="nav">
+		            <div class="nav_t">全部商品分类</div>
+		            
+		        </div>
+		        <!--End 商品分类详情 End-->
+		        <ul class="menu_r">
+		            <li><a href="index.html">首页</a></li>
+					<li><a href="休闲零食.html">休闲零食</a></li>
+					<li><a href="糕点饼干.html">糕点饼干</a></li>
+					<li><a href="饮料酒水.html">饮料酒水</a></li>
+					<li><a href="坚果.html">坚果</a></li>
+					<div id="showtime"></div>
+		        </ul>
+		        <div class="m_ad">双十一送好礼！</div>
+		    </div>
+		</div>
+		<!--End Menu-->
+		
+		<!-- 车车车 -->
+		<div class="i_bg">
+		    <!--Begin 第一步：查看购物车-->
+			   <div class="table wrapper">
+					<div class="tr">
+						<div>商品</div>
+						<div style="margin-left: -60px;">单价</div>
+						<div style="margin-left: 50px;">数量</div>
+						<div>小计</div>
+						<div >操作</div>
+					</div>
+					<div class="th">
+						<div class="pro clearfix">
+							<label class="fl">
+								<input type="checkbox"/>
+								<span></span>
+							</label>
+							<a class="fl" href="product2.html">
+								<dl class="clearfix">
+									<dt class="fl"><img src="image/cook1.jpg"  width="115px" height="93px"></dt>
+									<dd class="fl">
+										<p>乳酸菌风味小口袋面包</p>
+										<p>口味:</p>
+										<p>菠萝味</p>
+									</dd>
+								</dl>
+							</a>
+						</div>
+						<div class="price">¥19.00</div>
+						<div class="number">
+							<p class="num clearfix">
+								<img class="fl sub" src="image/sub.jpg">
+								<span class="fl">1</span>
+								<img class="fl add" src="image/add.jpg">
+							</p>
+						</div>
+						<div class="price sAll">¥19.00</div>
+						<div class="price"><a class="del" href="#2">删除</a></div>
+					</div>
+					<div class="th">
+						<div class="pro clearfix">
+							<label class="fl">
+								<input type="checkbox"/>
+								<span></span>
+							</label>
+							<a class="fl" href="#">
+								<dl class="clearfix">
+									<dt class="fl"><img src="image/p1-1.jpg"  width="115px" height="93px"></dt>
+									<dd class="fl">
+										<p>可比克花颜纯切薯片30g多口味零食</p>
+										<p>口味:</p>
+										<p>茉莉白桃味</p>
+									</dd>
+								</dl>
+							</a>
+						</div>
+						<div class="price">¥8.90</div>
+						<div class="number">
+							<p class="num clearfix">
+								<img class="fl sub" src="image/sub.jpg">
+								<span class="fl">1</span>
+								<img class="fl add" src="image/add.jpg">
+							</p>
+						</div>
+						<div class="price sAll">¥8.90</div>
+						<div class="price"><a class="del" href="#2">删除</a></div>
+					</div>
+					<div class="th">
+						<div class="pro clearfix">
+							<label class="fl">
+								<input type="checkbox"/>
+								<span></span>
+							</label>
+							<a class="fl" href="product3.html">
+								<dl class="clearfix">
+									<dt class="fl"><img src="image/p3-1.jpg"  width="115px" height="93px"></dt>
+									<dd class="fl">
+										<p>康师傅蜜桃乌龙茶</p>
+										<p>口味:</p>
+										<p>蜜桃味</p>
+									</dd>
+								</dl>
+							</a>
+						</div>
+						<div class="price">¥10.00</div>
+						<div class="number">
+							<p class="num clearfix">
+								<img class="fl sub" src="image/sub.jpg">
+								<span class="fl">1</span>
+								<img class="fl add" src="image/add.jpg">
+							</p>
+						</div>
+						<div class="price sAll">¥10.00</div>
+						<div class="price"><a class="del" href="#2">删除</a></div>
+					</div>
+					<div class="th">
+						<div class="pro clearfix">
+							<label class="fl">
+								<input type="checkbox"/>
+								<span></span>
+							</label>
+							<a class="fl" href="product4.html">
+								<dl class="clearfix">
+									<dt class="fl"><img src="image/p4-1.jpg"  width="115px" height="93px"></dt>
+									<dd class="fl">
+										<p>桶装每日坚果</p>
+										<p>口味:</p>
+										<p>原味</p>
+									</dd>
+								</dl>
+							</a>
+						</div>
+						<div class="price">¥199.00</div>
+						<div class="number">
+							<p class="num clearfix">
+								<img class="fl sub" src="image/sub.jpg">
+								<span class="fl">1</span>
+								<img class="fl add" src="image/add.jpg">
+							</p>
+						</div>
+						<div class="price sAll">¥199.00</div>
+						<div class="price"><a class="del" href="#2">删除</a></div>
+					</div>
+					<div class="goOn">空空如也~<a href="index.html">去逛逛</a></div>
+					<div class="tr clearfix">
+						<label class="fl">
+							<input class="checkAll" type="checkbox"/>
+							<span></span>
+						</label>
+						<p class="fl" style="margin-top: -1px;">
+							<a href="#">全选</a>
+							
+						</p>
+						<p class="fr" style="margin-top: -1px;">
+							<span>共<small id="sl">0</small>件商品</span>
+							<span>合计:&nbsp;<small id="all">¥0.00</small></span>
+							<a href="confirm_lcc.html" class="count">结算</a>
+						</p>
+					</div>
+				</div>
+		   </div>
+		   <div class="mask"></div>
+		   <div class="tipDel">
+				<p>确定要删除该商品吗？</p>
+				<p class="clearfix" style="margin-top: -20px;">
+					<a class="fl cer" href="#">确定</a>
+					<a class="fr cancel" href="#">取消</a>
+				</p>
+		   </div>
+			
+			<!--返回顶部-->
+			<div class="gotop">
+				<a href="buycar.html">
+					<dl>
+						<dt><img src="image/gt1.png"/></dt>
+						<dd>去购<br />物车</dd>
+					</dl>
+				</a>
+				<a href="#" class="toptop">
+					<dl>
+						<dt><img src="image/gt4.png"/></dt>
+						<dd>返回<br />顶部</dd>
+					</dl>
+				</a>
+			</div>
+			
+			<!--Begin Footer-->
+			<div class="behind_bottom_bg behind_bottom_common">
+				<div class="behind_bottom">
+					<table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="72"><img src="image/b1.png" width="62" height="62" /></td>
+							<td>
+								<h2>正品保障</h2>正品行货 放心购买
+							</td>
+						</tr>
+					</table>
+					<table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="72"><img src="image/b2.png" width="62" height="62" /></td>
+							<td>
+								<h2>满38包邮</h2>满38包邮 免运费
+							</td>
+						</tr>
+					</table>
+					<table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="72"><img src="image/b3.png" width="62" height="62" /></td>
+							<td>
+								<h2>天天低价</h2>天天低价 畅选无忧
+							</td>
+						</tr>
+					</table>
+					<table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="72"><img src="image/b4.png" width="62" height="62" /></td>
+							<td>
+								<h2>准时送达</h2>收货时间由你做主
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="bottom_bg">
+				<div class="bottom">
+					备案/许可证编号：京ICP备120093xxxx号 Copyright © 2019-2023 进口商城商城网 All Rights Reserved. <br />
+					
+				</div>
+			</div>
+			<!--End Footer -->
+		</div>
+	</body>
+</html>

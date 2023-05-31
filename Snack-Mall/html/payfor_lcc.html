@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>支付</title>
+    <link rel="stylesheet" type="text/css" href="style .css" />
+    <link rel="stylesheet" type="text/css" href="cart.css" />
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+
+    <script type="text/javascript" src="js/n_nav.js"></script>
+
+    <script type="text/javascript" src="js/num.js"></script>
+
+    <script type="text/javascript" src="js/toptop.js"> </script>
+    <script type="text/javascript" src="js/tantan.js"></script>
+    <script src="js/carts.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        //获取传入的参数
+        function getParam(paramName) {
+            paramValue = "", isFound = !1;
+            if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+            }
+            return paramValue == "" && (paramValue = null), paramValue
+        }
+
+        $(function () {
+            $(".btn-primary").click(function () {
+                location.href = "myorder_lcc.html"
+            });
+            $(".cartSumPrice").html(getParam("money").substring(2, getParam("money").length));
+        })
+    </script>
+</head>
+<style>
+    body {
+        font-size: 12px;
+        font-family: Arial;
+    }
+
+    a {
+        color: #999;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: #C40000;
+    }
+
+    div.cartProductChangeNumberDiv a {
+        width: 14px;
+        display: inline-block;
+        text-align: center;
+        color: black;
+        text-decoration: none;
+    }
+
+    nav.top {
+        background-color: #f2f2f2;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #e7e7e7;
+    }
+
+    nav.top span,
+    nav.top a {
+        color: #999;
+        margin: 0px 10px 0px 10px;
+    }
+
+    nav.top a:hover {
+        color: #C40000;
+        text-decoration: none;
+    }
+
+    div.PayDiv {
+        width: 1300px;
+        margin: 20px auto;
+    }
+
+    img.alipay {
+        left: 50%;
+    }
+
+    div.center-block {
+        margin: 20px auto;
+        width: 400px;
+    }
+
+    div.cartSumPrice {
+        color: #C40000;
+        font-weight: bold;
+        font-size: 30px;
+        margin-left: 33%;
+    }
+
+    div.zhifubao {
+        font-size: 16px;
+        margin-left: 34%;
+    }
+
+    div.tijiaola {
+        margin-left: 33%;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+    <!-- Head Begin -->
+    <div class="headbg">
+        <div class="head">
+
+
+            <!-- Begin 任务栏 -->
+            <span class="fr">
+                <span class="fl">
+                    你好，请<a href="login.html">登录&nbsp;</a>
+                    <a href="regist.html" style="color: red;">免费注册</a>
+                    | <a href="myorder_lcc.html">我的订单</a>
+
+
+                    | 关注我们：
+                </span>
+                <span class="show_style">
+                    <a href="#" class="style1">新浪</a>
+                    <a href="#" class="style2">微信</a>
+                </span>
+                <span class="fr">
+                    |
+                    <a href="#">
+                        手机版
+                        <img src="image/s_tel.png" align="absmiddle">
+                    </a>
+                </span>
+            </span>
+        </div>
+    </div>
+    <!-- End 任务栏 -->
+
+    <!-- Begin 任务栏下面 logo 搜索 购物车-->
+    <div class="top">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/logo.png">
+            </a>
+        </div>
+    </div>
+    <!--End Head-->
+
+    <div class="center-block">
+        <div class="zhifubao">扫一扫支付</div>
+        <div id="cartSumPrice" class="cartSumPrice">￥0.00</div>
+        <img class="alipay" src="image/zhifubao.png" width="400" height="600">
+        <div class="tijiaola">
+            <button class="btn btn-primary">我已经付款成功</button>
+        </div>
+
+    </div>
+</body>
+
+</html>

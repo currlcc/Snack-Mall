@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>我的订单</title>
+    <link rel="stylesheet" type="text/css" href="style .css" />
+    <link rel="stylesheet" type="text/css" href="cart.css" />
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+
+    <script type="text/javascript" src="js/n_nav.js"></script>
+
+    <script type="text/javascript" src="js/num.js"></script>
+
+    <script type="text/javascript" src="js/toptop.js"> </script>
+    <script type="text/javascript" src="js/tantan.js"></script>
+    <script src="js/carts.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        function showDate() {
+            var curDate = new Date();
+            var year = curDate.getFullYear();
+            var month = curDate.getMonth() + 1;
+            var date = curDate.getDate();
+            var day = curDate.getDay();
+            var week = ["日", "一", "二", "三", "四", "五", "六"];
+            var hours = curDate.getHours();
+            var minutes = curDate.getMinutes();
+            var seconds = curDate.getSeconds();
+            var str;
+
+            str = year + "年" + time(month) + "月" + time(date) + "日&nbsp;&nbsp;星期" + week[day] + "&nbsp;&nbsp;" + time(hours) + "时" + time(minutes) + "分" + time(seconds) + "秒";
+            console.log(str);
+            document.getElementById("showtime").innerHTML = str;
+        }
+        function time(x) {
+            return x >= 10 ? x : "0" + x;
+        }
+        window.onload = function () {
+            showDate();
+            setInterval(showDate, 1000);
+        }
+    </script>
+</head>
+<style>
+    div.boughtDiv {
+        max-width: 1013px;
+        margin: 50px auto 0px auto;
+    }
+
+    div.orderType div {
+        border-bottom: 2px solid #E8E8E8;
+        float: left;
+    }
+
+    div.orderType a {
+        border-right: 1px solid #E8E8E8;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 10px;
+        padding: 0px 20px;
+        text-decoration: none;
+    }
+
+    div.orderType a:hover {
+        color: #C40000;
+    }
+
+    div.orderType div.selectedOrderType {
+        border-bottom: 2px solid #C40000;
+    }
+
+    div.orderListTitle {
+        padding-top: 20px;
+    }
+
+    div.orderType div.selectedOrderType a {
+        color: #C40000;
+    }
+
+    div.orderTypeLastOne {
+        overflow: hidden;
+        float: none !important;
+        border-bottom: 2px solid #E8E8E8;
+        height: 35px;
+    }
+
+    a.noRightborder {
+        border-right-width: 0px !important;
+    }
+
+    table.orderListTitleTable {
+        border: 1px solid #E8E8E8;
+        width: 100%;
+        margin: 20px 0px;
+        background-color: #F5F5F5;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    table.orderListTitleTable td {
+        padding: 12px 0px;
+    }
+
+    table.orderListItemTable {
+        border: 2px solid #ECECEC;
+        width: 100%;
+        margin: 20px 0px;
+        font-size: 12px;
+
+    }
+
+    table.orderListItemTable:hover {
+        border: 2px solid #aaa !important;
+    }
+
+    table.orderListItemTable td {
+        padding: 8px 10px;
+    }
+
+    div.orderListItem tr.orderListItemFirstTR {
+        background-color: #F5F5F5;
+    }
+
+    tr.orderListItemFirstTR {
+        background-color: #F1F1F1;
+    }
+
+    div.orderItemWangWangGif {
+        display: inline-block;
+        width: 67px;
+        height: 22px;
+        background-image: url(http://how2j.cn/tmall/img/site/wangwang.gif);
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-attachment: scroll;
+        background-position: -0px -0px;
+        position: relative;
+        top: 0px;
+        left: 2px;
+    }
+
+    td.orderItemDeleteTD {
+        text-align: right;
+    }
+
+    div.orderListItemProductLinkOutDiv {
+        position: relative;
+        height: 80px;
+        text-align: left;
+    }
+
+    div.orderListItemProductLinkInnerDiv {
+        position: absolute;
+        bottom: 0px;
+    }
+
+    div.orderListItemProductOriginalPrice {
+        color: #999999;
+        font-size: 14px;
+    }
+
+    div.orderListItemProductPrice {
+        color: #3C3C3C;
+        font-size: 14px;
+    }
+
+    td.orderListItemNumberTD {
+        text-align: center;
+    }
+
+    td.orderItemOrderInfoPartTD {
+        border: solid 1px #ECECEC;
+    }
+
+    span.orderListItemNumber {
+        color: #3C3C3C;
+    }
+
+    td.orderListItemProductRealPriceTD {
+        text-align: center;
+    }
+
+    div.orderListItemProductRealPrice {
+        color: #3C3C3C;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    div.orderListItemPriceWithTransport {
+        color: #6C6C6C;
+        font-size: 12px;
+    }
+
+    td.orderListItemButtonTD {
+        text-align: center;
+    }
+
+    button.orderListItemReview {
+        border: 1px solid #DCDCDC;
+        background-color: #fff;
+        border-radius: 2px;
+        color: #3C3C3C;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 6px 12px;
+    }
+
+    button.orderListItemReview:hover {
+        border-color: #C40000;
+        color: #C40000;
+    }
+
+    button.orderListItemConfirm {
+        background-color: #66B6FF;
+        border-radius: 2px;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        border-width: 0px;
+        padding: 6px 12px;
+    }
+
+    button.orderListItemConfirm:hover {
+        background-color: #118ADB;
+    }
+
+    a {
+        color: #999;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: #C40000;
+    }
+
+    body {
+        font-size: 12px;
+        font-family: Arial;
+    }
+
+    a {
+        color: #999;
+    }
+
+    .redColor {
+        color: #C40000 !important;
+    }
+
+    footer {
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        /* 100% of viewport width */
+    }
+</style>
+
+<script>
+    $(function () {
+        $("a[orderStatus]").click(function () {
+            var orderStatus = $(this).attr("orderStatus");
+            if ("all" == orderStatus) {
+                $("table[orderStatus]").show();
+            } else {
+                $("table[orderStatus]").hide();
+                $("table[orderStatus=" + orderStatus + "]").show()
+            }
+        })
+
+    })
+
+</script>
+
+<body>
+    <!-- Head Begin -->
+    <div class="headbg">
+        <div class="head">
+
+
+            <!-- Begin 任务栏 -->
+            <span class="fr">
+                <span class="fl">
+                    你好，请<a href="login.html">登录&nbsp;</a>
+                    <a href="regist.html" style="color: red;">免费注册</a>
+                    | <a href="myorder_lcc.html">我的订单</a>
+
+
+                    | 关注我们：
+                </span>
+                <span class="show_style">
+                    <a href="#" class="style1">新浪</a>
+                    <a href="#" class="style2">微信</a>
+                </span>
+                <span class="fr">
+                    |
+                    <a href="#">
+                        手机版
+                        <img src="image/s_tel.png" align="absmiddle">
+                    </a>
+                </span>
+            </span>
+        </div>
+    </div>
+    <!-- End 任务栏 -->
+
+    <!-- Begin 任务栏下面 logo 搜索 购物车-->
+    <div class="top">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/logo.png">
+            </a>
+        </div>
+        <div class="search">
+            <form action="">
+                <input type="text" value="" class="search_input" />
+                <input type="submit" value="搜索" class="search_button" />
+            </form>
+
+        </div>
+        <div class="info_car">
+            <div class="car_temp">购物车 <a href="buycar.html">GO</a></div>
+
+        </div>
+    </div>
+    <!--End Head-->
+    <div class="boughtDiv">
+        <div class="orderType">
+            <div class="selectedOrderType"><a href="#nowhere" orderstatus="all">所有订单</a></div>
+            <div><a href="#nowhere" orderstatus="waitPay">待付款</a></div>
+            <div><a href="#nowhere" orderstatus="waitDelivery">待发货</a></div>
+            <div><a href="#nowhere" orderstatus="waitConfirm">待收货</a></div>
+            <div><a class="noRightborder" href="#nowhere" orderstatus="waitReview">待评价</a></div>
+            <div class="orderTypeLastOne">
+
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="orderListTitle">
+            <table class="orderListTitleTable">
+                <tbody>
+                    <tr>
+                        <td width="400px">商品</td>
+                        <td width="100px">单价</td>
+                        <td width="100px">数量</td>
+                        <td width="120px">实付款</td>
+                        <td width="100px">交易操作</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="boughtDiv">
+        <div class="orderListItem">
+            <table oid="946" orderstatus="waitReview" class="orderListItemTable">
+                <tbody>
+                    <tr class="orderListItemFirstTR">
+                        <td colspan="2">
+                            <b>2023-05-26 20:00:00</b>
+                            <span>订单号: 12341234123412341234
+                            </span>
+                        </td>
+                        <td colspan="2"></td>
+                        <td colspan="1"></td>
+                        <td colspan="1"></td>
+                    </tr>
+                    <tr class="orderItemProductInfoPartTR">
+                        <td class="orderItemProductInfoPartTD"><img width="80" height="80" src="image/cook1.jpg"></td>
+                        <td class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductLinkOutDiv">
+                                <a href="product2.html">乳酸菌小口袋面包整箱蛋糕夹心点心小零食健康早餐休闲食品小吃</a>
+                                <div class="orderListItemProductLinkInnerDiv">
+                                    <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="100px" class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductOriginalPrice">¥19.00</div>
+                            <div class="orderListItemProductPrice">¥19.00</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <span class="orderListItemNumber">2</span>
+                        </td>
+                        <td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <div class="orderListItemProductRealPrice">¥38.00</div>
+                            <div class="orderListItemPriceWithTransport">(含运费：¥0.00)</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <a href="#nowhere">
+                                <button class="orderListItemReview">评价</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table oid="945" orderstatus="waitConfirm" class="orderListItemTable">
+                <tbody>
+                    <tr class="orderListItemFirstTR">
+                        <td colspan="2">
+                            <b>2023-05-26 20:00:00</b>
+                            <span>订单号: 45674567456745674567
+                            </span>
+                        </td>
+                        <td colspan="2"></td>
+                        <td colspan="1"></td>
+                        <td colspan="1"></td>
+                    </tr>
+                    <tr class="orderItemProductInfoPartTR">
+                        <td class="orderItemProductInfoPartTD"><img width="80" height="80" src="image/p1-1.jpg"></td>
+                        <td class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductLinkOutDiv">
+                                <a href="#nowhere">可比克花颜纯切薯片30g多口味零食网红夜宵充饥解馋小零食休闲食品</a>
+                                <div class="orderListItemProductLinkInnerDiv">
+                                    <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="100px" class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductOriginalPrice">¥8.90</div>
+                            <div class="orderListItemProductPrice">¥8.00</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <span class="orderListItemNumber">1</span>
+                        </td>
+                        <td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <div class="orderListItemProductRealPrice">¥8.00</div>
+                            <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <a href="#nowhere">
+                                <button class="orderListItemConfirm">确认收货</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table oid="944" orderstatus="waitDelivery" class="orderListItemTable" style="display: table;">
+                <tbody>
+                    <tr class="orderListItemFirstTR">
+                        <td colspan="2">
+                            <b>2023-05-26 20:00:00</b>
+                            <span>订单号: 89018901890189018901
+                            </span>
+                        </td>
+                        <td colspan="2"></td>
+                        <td colspan="1"></td>
+                        <td colspan="1"></td>
+                    </tr>
+                    <tr class="orderItemProductInfoPartTR">
+                        <td class="orderItemProductInfoPartTD"><img width="80" height="80" src="image/p3-1.jpg"></td>
+                        <td class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductLinkOutDiv">
+                                <a href="#nowhere">康师傅蜜桃乌龙茶新品茶饮料330ml*12瓶装整箱批发解腻囤货饮品</a>
+                                <div class="orderListItemProductLinkInnerDiv">
+                                    <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="100px" class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductOriginalPrice">¥10.00</div>
+                            <div class="orderListItemProductPrice">¥8.90</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <span class="orderListItemNumber">1</span>
+                        </td>
+                        <td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <div class="orderListItemProductRealPrice">¥8.90</div>
+                            <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <span>待发货</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table oid="943" orderstatus="waitPay" class="orderListItemTable" style="display: table;">
+                <tbody>
+                    <tr class="orderListItemFirstTR">
+                        <td colspan="2">
+                            <b>2023-05-26 20:00:00</b>
+                            <span>订单号: 23452345234523452345
+                            </span>
+                        </td>
+                        <td colspan="2"></td>
+                        <td colspan="1"></td>
+                        <td colspan="1"></td>
+                    </tr>
+                    <tr class="orderItemProductInfoPartTR">
+                        <td class="orderItemProductInfoPartTD"><img width="80" height="80" src="image/p6-2.jpg"></td>
+                        <td class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductLinkOutDiv">
+                                <a href="product.html">三只松鼠蟹黄味瓜子仁休闲零食炒货瓜子仁特产小吃蟹黄咸蛋黄味</a>
+                                <div class="orderListItemProductLinkInnerDiv">
+                                    <img title="7天无理由退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="100px" class="orderItemProductInfoPartTD">
+                            <div class="orderListItemProductOriginalPrice">¥19.00</div>
+                            <div class="orderListItemProductPrice">¥17.00</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <span class="orderListItemNumber">1</span>
+                        </td>
+                        <td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <div class="orderListItemProductRealPrice">¥17.00</div>
+                            <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
+                        </td>
+                        <td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD"
+                            rowspan="1">
+                            <a href="#nowhere">
+                                <button class="orderListItemConfirm">付款</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--返回顶部-->
+        <div class="gotop">
+            <a href="buycar.html">
+                <dl>
+                    <dt><img src="image/gt1.png" /></dt>
+                    <dd>去购<br />物车</dd>
+                </dl>
+            </a>
+            <a href="#" class="toptop">
+                <dl>
+                    <dt><img src="image/gt4.png" /></dt>
+                    <dd>返回<br />顶部</dd>
+                </dl>
+            </a>
+        </div>
+
+
+    </div>
+</body>
+<footer>
+    <!--Begin Footer-->
+    <div class="behind_bottom_bg behind_bottom_common">
+        <div class="behind_bottom">
+            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="72"><img src="image/b1.png" width="62" height="62" /></td>
+                    <td>
+                        <h2>正品保障</h2>正品行货 放心购买
+                    </td>
+                </tr>
+            </table>
+            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="72"><img src="image/b2.png" width="62" height="62" /></td>
+                    <td>
+                        <h2>满38包邮</h2>满38包邮 免运费
+                    </td>
+                </tr>
+            </table>
+            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="72"><img src="image/b3.png" width="62" height="62" /></td>
+                    <td>
+                        <h2>天天低价</h2>天天低价 畅选无忧
+                    </td>
+                </tr>
+            </table>
+            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="72"><img src="image/b4.png" width="62" height="62" /></td>
+                    <td>
+                        <h2>准时送达</h2>收货时间由你做主
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="bottom_bg">
+        <div class="bottom">
+            备案/许可证编号：京ICP备120093xxxx号 Copyright © 2019-2023 进口商城商城网 All Rights Reserved. <br />
+        </div>
+    </div>
+    <!--End Footer -->
+</footer>
+
+</html>
